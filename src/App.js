@@ -1,22 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+//import Example from './Example';
+//import AFew from './AFew';
+import Message from './Message';
 
-function App() {
+
+function App(props) {
+
+  const isRed = `App-header ${props.showRed ? 'header-red' : 'header-blue'}`
+  const isSize =`App-text ${props.showSizeLetters ? 'text-capital' : 'text-small'}`
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div
+     className={"App"} 
+     >
+      <header
+       className={isRed}>
+         <p className={isSize}>
+        <Message/>
+        {props.text}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding-top: 25px;
 }
 
 .App-logo {
@@ -35,4 +36,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header-red {
+  background-color: #ff0000;
+}
+
+.header-blue {
+  background-color: #0000ff;
+}
+
+.App-text {
+  color: #e6f704;
+}
+.text-capital {
+  font-size: 60px;
+}
+
+.text-small {
+  font-size: 20px;
 }
