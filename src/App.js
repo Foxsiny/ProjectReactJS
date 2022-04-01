@@ -1,6 +1,4 @@
 import './App.scss';
-//import Example from './Example';
-//import AFew from './AFew';
 import Message from './Message';
 
 
@@ -16,7 +14,7 @@ function App(props) {
       <header
        className={isRed}>
          <p className={isSize}>
-        <Message/>
+        <Message text={'Привет мир'}/>
         {props.text}
         </p>
       </header>
