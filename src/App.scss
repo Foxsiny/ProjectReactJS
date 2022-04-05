@@ -56,3 +56,25 @@
 .text-small {
   font-size: 20px;
 }
+
+.App-header {
+  background-color: whitesmoke; //#61dafb;
+  color: slategray;
+}
+
+.App-message {
+  font-family: cursive;
+
+  color: slategray;
+}
+
+.App-input {
+  font-family: monospace;
+  border-radius: 10px;
+  border-color: transparent;
+}
+.App-btn {
+  border-radius: 10px;
+  border-color: mediumvioletred;
+  color: mediumvioletred;
+}
