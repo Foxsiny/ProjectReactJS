@@ -63,18 +63,39 @@
 }
 
 .App-message {
-  font-family: cursive;
-
   color: slategray;
 }
-
+sup {
+  font-family: cursive;
+}
 .App-input {
-  font-family: monospace;
   border-radius: 10px;
   border-color: transparent;
 }
 .App-btn {
   border-radius: 10px;
-  border-color: mediumvioletred;
+  border-color: transparent;
+  //border-color: mediumvioletred;
   color: mediumvioletred;
+  background-color: lightgrey;
+}
+
+.controlPanel {
+  display: flex;
+}
+
+.menu {
+  display: flex;
+
+  li {
+    list-style: none;
+    margin: 0 20px;
+    a {
+      color: slategray;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
 }
