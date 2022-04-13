@@ -2,8 +2,6 @@ import React, {useRef, useEffect, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
-
-//import React from 'react';
 import {useParams} from 'react-router-dom';
 import {AUTHOR} from '../constants/common';
 
@@ -11,7 +9,6 @@ import {AUTHOR} from '../constants/common';
 const ControlPanel = ({addMessage}) => {
 
     let   {chatId}  = useParams();
-    //const[messageList, setMessageList] = useState([]);
     const[value, setValue] = useState('');
     const inputRef = useRef(null);
 
@@ -24,8 +21,7 @@ const ControlPanel = ({addMessage}) => {
         e.preventDefault();
         if (value !== ''){
             const newMessage = {text: value, author: AUTHOR.me };
-            addMessage(chatId,newMessage);
-            //setMessageList([...messageList, newMessage]);
+            addMessage(chatId, newMessage);
             setValue('');
             inputRef.current?.focus();
         }

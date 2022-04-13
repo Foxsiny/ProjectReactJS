@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange, purple} from '@mui/material/colors';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const theme = createTheme({
@@ -38,7 +39,9 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App  showRed showSizeLetters/>
+      <BrowserRouter>
+        <App  showRed showSizeLetters/>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

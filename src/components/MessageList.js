@@ -4,7 +4,7 @@ const MessageList = ({chats}) => {
     let   {chatId}  = useParams();
 
     if (!chats[chatId]) return null;
-
+    
     const messages = chats[chatId].messages;
     
     return (
