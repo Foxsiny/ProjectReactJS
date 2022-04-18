@@ -8,15 +8,31 @@ import {
     ListItemText
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {Link} from 'react-router-dom';
-//import FolderIcon from '@mui/icons-material/Folder';
+import { Link } from 'react-router-dom';
+import {useContext} from 'react';
+import {MyThemeContext} from '../App';
 
-const ChatList = ({chats}) => {
-    //let   {chatId}  = useParams();
 
+const ChatList = ({ chats }) => {
+    const contextValue = useContext(MyThemeContext);
     return <div>
+        {/* <MyThemeContext.Consumer>
+            {(theme) => (
+                <div>
+                    <h1>{theme.theme}</h1>
+                    <button onClick={() => theme.setTheme (theme.theme === 'dark' ? 'light ' : 'dark')}>
+                        Change theme
+                    </button>
+                </div>
+            )}
+        </MyThemeContext.Consumer> */}
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
             Chat List
+            <br />
+            My Theme is <h1>{contextValue.theme}</h1>
+            <button onClick={() => contextValue.setTheme (contextValue.theme === 'dark' ? 'light ' : 'dark')}>
+                        Change theme
+            </button>
         </Typography>
         <List>
             {Object.keys(chats).map((chat, index) => (
@@ -27,12 +43,9 @@ const ChatList = ({chats}) => {
                             <IconButton edge="end" aria-label="delete">
                                 <DeleteIcon />
                             </IconButton>
-                        }
-                    >
+                        }>
                         <ListItemAvatar>
-                        <Avatar>
-                            {/* <FolderIcon /> */}
-                        </Avatar>
+                            <Avatar />
                         </ListItemAvatar>
                         <ListItemText primary={chats[chat].name}/>
                     </ListItem>

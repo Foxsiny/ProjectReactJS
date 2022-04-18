@@ -5,6 +5,8 @@ import App from './App';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { orange, purple} from '@mui/material/colors';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 const theme = createTheme({
@@ -38,11 +40,13 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <App  showRed showSizeLetters/>
       </BrowserRouter>
     </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
