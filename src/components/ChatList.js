@@ -1,58 +1,87 @@
 import {
-    Typography,
+    Avatar,
+    Button,
+    Dialog,
+    DialogTitle,
+    IconButton,
     List,
     ListItem,
-    IconButton,
     ListItemAvatar,
-    Avatar,
-    ListItemText
+    ListItemText,
+    //Paper,
+    TextField
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
-import {useContext} from 'react';
-import {MyThemeContext} from '../App';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { addChat } from '../store/chats/actions';
 
 
-const ChatList = ({ chats }) => {
-    const contextValue = useContext(MyThemeContext);
-    return <div>
-        {/* <MyThemeContext.Consumer>
-            {(theme) => (
-                <div>
-                    <h1>{theme.theme}</h1>
-                    <button onClick={() => theme.setTheme (theme.theme === 'dark' ? 'light ' : 'dark')}>
-                        Change theme
-                    </button>
-                </div>
-            )}
-        </MyThemeContext.Consumer> */}
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Chat List
-            <br />
-            My Theme is <h1>{contextValue.theme}</h1>
-            <button onClick={() => contextValue.setTheme (contextValue.theme === 'dark' ? 'light ' : 'dark')}>
-                        Change theme
-            </button>
-        </Typography>
-        <List>
-            {Object.keys(chats).map((chat, index) => (
-                <Link to={`/chats/${chat}`} key={index}>
-                    <ListItem
-                        key={index}
-                        secondaryAction={
-                            <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        }>
-                        <ListItemAvatar>
-                            <Avatar />
-                        </ListItemAvatar>
-                        <ListItemText primary={chats[chat].name}/>
-                    </ListItem>
-                </Link>
-            ))}
-        </List>
-    </div>;
+const ChatList = () => {
+    const chats = useSelector((state) => state.chats.chatList);
+    const [visible, setVisible] = useState(false);
+    const [chatName, setChatName] = useState('');
+    const dispatch = useDispatch();
+
+    const handleChatName = (e) => {
+        setChatName(e.target.value);
+    };
+
+    const handleClose = () => {
+        setVisible(false);
+    };
+
+    const handleAdd = () => {
+        setVisible(true);
+    };
+
+    const handleSave = () => {
+        dispatch(addChat(chatName));
+        setChatName('');
+        handleClose();
+    };
+
+    return (
+        <div>
+            <List>
+                {chats?.length > 0 ? (
+                    chats.map((chat) => (
+                    <Link to={`/chats/${chat.Id}`} key={chat.Id}>
+                        <ListItem
+                            secondaryAction={
+                                <IconButton edge="end" aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            }>
+                            <ListItemAvatar>
+                                <Avatar />
+                            </ListItemAvatar>
+                            <ListItemText primary={chat.name}/>
+                        </ListItem>
+                    </Link>
+                )) 
+                ) : (
+                    <div>Chats not found</div>
+                )}
+            </List>
+            <Button onClick={handleAdd}> Add chat</Button>
+            <Dialog open={visible} onClose={handleClose}>
+                {/* <Paper style={{ padding: '10px'}}> */}
+                    <DialogTitle>Please enter a name for a new chat</DialogTitle>
+                    <TextField
+                        placeholder="Chat name"
+                        value={chatName}
+                        onChange={handleChatName}
+                        // fullWidth
+                    />
+                    {/* <br /> */}
+                    {/* <br /> */}
+                    <Button onClick={handleSave} /*variant="outlined"*/ >Save chat</Button>
+                {/* </Paper> */}
+            </Dialog>
+        </div>
+    );
 };
 
 export default ChatList

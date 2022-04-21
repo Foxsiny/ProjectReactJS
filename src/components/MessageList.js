@@ -1,21 +1,68 @@
 import {useParams} from 'react-router-dom';
+import {
+    Avatar,
+    Divider,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Typography
+} from '@mui/material';
+import { AccountCircle, Android } from '@mui/icons-material';
+import { AUTHOR } from '../constants/common';
+import { useSelector } from 'react-redux';
 
-const MessageList = ({chats}) => {
+const MessageList = () => {
+    //const chats = useSelector(state => state.chats.chatList);
+    const allMessages = useSelector((state) => state.messages.messageList);
     let   {chatId}  = useParams();
-
-    if (!chats[chatId]) return null;
+    const { name } = useSelector((state) => state.profile);
+    const date = useSelector((state) =>  state.messages);
+    console.log(date);
+    if (!allMessages[chatId]) return null;
     
-    const messages = chats[chatId].messages;
+    const messages = allMessages[chatId];
+
+    const isAuthorBot = (author) => {
+        return author === AUTHOR.bot;
+    };
     
     return (
-        <div>
-            {messages.map((element, index) =>(
-                <div key={index} className="App-message">
-                    <p>{element.text}</p>
-                    <sup>{element.author}</sup>
-                </div>
-            ))}
-        </div>
+        <>
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {messages.map((element) =>(
+                    <div key={element.Id} className="App-message">
+                        <ListItem alignItems="flex-start">
+                            <ListItemAvatar>
+                                <Avatar alt="Remy Sharp">
+                                    {isAuthorBot(element.author) ? (
+                                        <Android/>
+                                    ) : (<AccountCircle/>
+                                    )}
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={isAuthorBot(element.author) ? AUTHOR.bot : name}
+                                secondary={
+                                    <>
+                                        <Typography
+                                            sx={{ display: 'inline' }}
+                                            component="span"
+                                            variant="body2"
+                                            color="text.primary"
+                                        >
+                                            {element.text}
+                                        </Typography>
+                                    </>
+                                }
+                            />
+                        </ListItem>
+                        <Divider variant="inset" component="li" />
+                    </div>
+                ))}
+            
+            </List>
+        </>
     );
 };
     

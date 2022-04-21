@@ -3,14 +3,20 @@ import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import {useParams} from 'react-router-dom';
-import {AUTHOR} from '../constants/common';
+//import {AUTHOR} from '../constants/common';
+import {useDispatch, useSelector } from 'react-redux';
+
+import { addMessage } from '../store/messages/actions';
 
 
-const ControlPanel = ({addMessage}) => {
 
-    let   {chatId}  = useParams();
+const ControlPanel = () => {
+
+    let { chatId }  = useParams();
     const[value, setValue] = useState('');
     const inputRef = useRef(null);
+    const dispatch = useDispatch();
+    const authorName = useSelector(state => state.profile.name)
 
 
     const handleInput = (event) => {
@@ -20,8 +26,8 @@ const ControlPanel = ({addMessage}) => {
     const handleClick = (e) => {
         e.preventDefault();
         if (value !== ''){
-            const newMessage = {text: value, author: AUTHOR.me };
-            addMessage(chatId, newMessage);
+            const newMessage = {text: value, author: authorName };
+            dispatch(addMessage(chatId, newMessage));
             setValue('');
             inputRef.current?.focus();
         }
