@@ -2,7 +2,7 @@
 import { ADD_MESSAGE } from "./actions"
 
 const initialState = {
-    massageList: {}
+    messageList: {}
 };
 
 

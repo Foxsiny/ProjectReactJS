@@ -13,12 +13,13 @@ import { AUTHOR } from '../constants/common';
 import { useSelector } from 'react-redux';
 
 const MessageList = () => {
-    //const chats = useSelector(state => state.chats.chatList);
+    
     const allMessages = useSelector((state) => state.messages.messageList);
-    let   {chatId}  = useParams();
     const { name } = useSelector((state) => state.profile);
-    const date = useSelector((state) =>  state.messages);
-    console.log(date);
+    
+    let   {chatId}  = useParams();
+    
+
     if (!allMessages[chatId]) return null;
     
     const messages = allMessages[chatId];

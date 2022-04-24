@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import {useParams} from 'react-router-dom';
-//import {AUTHOR} from '../constants/common';
+import {AUTHOR} from '../constants/common';
 import {useDispatch, useSelector } from 'react-redux';
 
 import { addMessage } from '../store/messages/actions';
@@ -16,8 +16,10 @@ const ControlPanel = () => {
     const[value, setValue] = useState('');
     const inputRef = useRef(null);
     const dispatch = useDispatch();
-    const authorName = useSelector(state => state.profile.name)
-
+    const authorName = useSelector((state) => state.profile.name);
+    const allMessages = useSelector((state) => state.messages.messageList);
+    
+    const messages = allMessages[chatId] || [];
 
     const handleInput = (event) => {
         setValue(event.target.value);
@@ -37,21 +39,23 @@ const ControlPanel = () => {
         inputRef.current?.focus();
         }, []);
 
-    // useEffect(() => {
-    //     let timerId;
-    //     if (messageList.length > 0
-    //         && messageList[messageList.length - 1].author !== AUTHOR.bot){
-    //         timerId = setInterval(()=> {
-    //         setMessageList([...messageList, newMessage]);
-    //         }, 1500);
-    //         const newMessage = {text: 'Привет друг! Как дела?', author: AUTHOR.bot };
-    //     }
-    //     return () => {
-    //         if (timeId){
-    //             cltarInterval(timeId);
-    //         }
-    //     }
-    // }, [messageList] ); 
+    useEffect(() => {
+        let timerId;
+        if (
+            messages?.length > 0 &&
+            messages[messages.length - 1].author !== AUTHOR.bot
+            ){
+                const newMessage = {text: 'Привет друг! Как дела?', author: AUTHOR.bot };
+                timerId = setInterval(()=> {
+                    dispatch(addMessage(chatId, newMessage))
+                }, 1500);
+            }
+            return () => {
+                if (timerId){
+                    clearInterval(timerId);
+                }
+            }
+        }, [messages, chatId]); 
 
     
     return ( 
