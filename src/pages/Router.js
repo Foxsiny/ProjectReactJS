@@ -3,13 +3,10 @@ import Chats from './Chats';
 import Profile  from './Profile';
 import Home  from './Home';
 
-//import { useState } from 'react';
 
 
 const Router = () => {
-    
     return (<>
-
         <ul className={'menu'} >
             <li>
                 <Link to="/">Home</Link>
@@ -21,7 +18,6 @@ const Router = () => {
                 <Link to="/chats">Chats</Link>
             </li>
         </ul>
-
         <Routes>
             <Route path="/" exact element={<Home />}/>
             <Route path="/profile" element={<Profile />}/>
