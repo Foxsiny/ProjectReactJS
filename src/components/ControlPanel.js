@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import {useParams} from 'react-router-dom';
 //import {AUTHOR} from '../constants/common';
 import {useDispatch, useSelector } from 'react-redux';
-
+//import { addMessageWithSaga } from '../store/messages/actions';
 import { addMessageWithThunk } from '../store/messages/actions';
 
 
@@ -38,24 +38,6 @@ const ControlPanel = () => {
     useEffect(() => {
         inputRef.current?.focus();
         }, []);
-
-    // useEffect(() => {
-    //     let timerId;
-    //     if (
-    //         messages?.length > 0 &&
-    //         messages[messages.length - 1].author !== AUTHOR.bot
-    //         ){
-    //             const newMessage = {text: 'Привет друг! Как дела?', author: AUTHOR.bot };
-    //             timerId = setInterval(()=> {
-    //                 dispatch(addMessage(chatId, newMessage))
-    //             }, 1500);
-    //         }
-    //         return () => {
-    //             if (timerId){
-    //                 clearInterval(timerId);
-    //             }
-    //         }
-    //     }, [messages, chatId]); 
 
     
     return ( 
