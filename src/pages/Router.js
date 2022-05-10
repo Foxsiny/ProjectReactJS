@@ -2,7 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Chats from './Chats';
 import Profile  from './Profile';
 import Home  from './Home';
-
+import Gists  from './Gists';
 
 
 const Router = () => {
@@ -17,10 +17,14 @@ const Router = () => {
             <li>
                 <Link to="/chats">Chats</Link>
             </li>
+            <li>
+                <Link to="/gists">Gists</Link>
+            </li>
         </ul>
         <Routes>
             <Route path="/" exact element={<Home />}/>
             <Route path="/profile" element={<Profile />}/>
+            <Route path="/gists" element={<Gists />}/>
             <Route path="/chats">
                 <Route index element={<Chats /> }/>
                 <Route path=":chatId" element={<Chats />} />
