@@ -1,6 +1,7 @@
 import './App.scss';
 import Router from './pages/Router';
 import React, {useState} from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const MyThemeContext = React.createContext('light');
