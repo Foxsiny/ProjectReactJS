@@ -5,7 +5,7 @@ import Home  from './Home';
 import Gists  from './Gists';
 import Login from './Login';
 import Registration from './Registration';
-import RequireAuse from '../hocs/RequireAuth';
+import RequireAuth from '../hocs/RequireAuth';
 
 
 const Router = () => {
@@ -30,19 +30,24 @@ const Router = () => {
                 <Link to="/registration">Registration</Link>
             </li>
         </ul>
-        <Routes>
+
+    
+     
+
+        <Routes> 
             <Route path="/" exact element={<Home />}/>
             
             <Route path="/login" element={<Login />}/>
             <Route path="/registration" element={<Registration />}/>
-            <Route element={<RequireAuse />}>
+            <Route element={<RequireAuth />}>
                 <Route path="/profile" element={<Profile />}/>
                 <Route path="/gists" element={<Gists />}/>
-                <Route path="/chats/:chatId" element={<Chats />} />
+                <Route path="/chats:chatId" element={<Chats />} />
             </Route>
-            <Route path="*" element={<Chats />}/>
+            <Route path="*" element={<Chats />}/> 
         </Routes>
-    </>
-    )};
+     </>
+    );
+};
 
 export default Router;

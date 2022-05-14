@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import firebaseConfig from '../services/firebaseConfig';
 import {
     getAuth,
@@ -6,16 +6,16 @@ import {
     onAuthStateChanged,
     signOut
 } from 'firebase/auth';
-import {useState} from 'react';
+
 
 let AuthContext = React.createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState();
 
-    let signin = async(newUser, callback) => {
+    let signin = async (newUser, callback) => {
         const auth = getAuth(firebaseConfig);
-        await signInWithEmailAndPassword(auth, newUser.password);
+        await signInWithEmailAndPassword(auth, newUser.email, newUser.password);
         await onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
