@@ -10,7 +10,9 @@ import {
 } from '@mui/material';
 import { AccountCircle, Android } from '@mui/icons-material';
 import { AUTHOR } from '../constants/common';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getMessagesByChatWithFB } from '../middlewares/middleware'
 
 const MessageList = () => {
     
@@ -18,21 +20,30 @@ const MessageList = () => {
     const { name } = useSelector((state) => state.profile);
     
     let   {chatId}  = useParams();
-    
 
-    if (!allMessages[chatId]) return null;
+    const dispatch = useDispatch();
+    console.log('mes',allMessages);
+
+    //if (!allMessages[chatId]) return null;
     
     const messages = allMessages[chatId];
 
     const isAuthorBot = (author) => {
         return author === AUTHOR.bot;
     };
+
+    useEffect(() => {
+        dispatch(getMessagesByChatWithFB(chatId))
+    }, [chatId]);
+
+    console.log('mes',messages);
     
     return (
         <>
+        <h1>Hello</h1>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {messages.map((element) =>(
-                    <div key={element.Id} className="App-message">
+                {messages?.map((element, index) =>(
+                    <div key={index} className="App-message">
                         <ListItem alignItems="flex-start">
                             <ListItemAvatar>
                                 <Avatar alt="Remy Sharp">

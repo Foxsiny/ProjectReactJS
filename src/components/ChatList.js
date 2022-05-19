@@ -12,10 +12,15 @@ import {
     TextField
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { addChat } from '../store/chats/actions';
+import { useEffect, useState } from 'react';
+//import { addChat } from '../store/chats/actions';
+import {
+    addChatWithFB,
+    deleteChatWithFB,
+    initTrackerWithFB
+} from '../middlewares/middleware';
 
 
 const ChatList = () => {
@@ -23,6 +28,7 @@ const ChatList = () => {
     const [visible, setVisible] = useState(false);
     const [chatName, setChatName] = useState('');
     const dispatch = useDispatch();
+    const {chatId} = useParams();
 
     const handleChatName = (e) => {
         setChatName(e.target.value);
@@ -37,20 +43,31 @@ const ChatList = () => {
     };
 
     const handleSave = () => {
-        dispatch(addChat(chatName));
+        dispatch(addChatWithFB(chatName));
         setChatName('');
         handleClose();
     };
+
+    const deleteChat = (id) => {
+        dispatch(deleteChatWithFB(id));
+    };
+
+    useEffect(() => {
+        dispatch(initTrackerWithFB());
+    }, [chatId]);
 
     return (
         <div>
             <List>
                 {chats?.length > 0 ? (
                     chats.map((chat) => (
-                    <Link to={`/chats/${chat.Id}`} key={chat.Id}>
+                    <Link to={`/chats/${chat.id}`} key={chat.id}>
                         <ListItem
                             secondaryAction={
-                                <IconButton edge="end" aria-label="delete">
+                                <IconButton 
+                                    edge="end"
+                                    aria-label="delete"
+                                    onClick={() => deleteChat(chat.id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             }>

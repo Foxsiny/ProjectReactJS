@@ -3,10 +3,11 @@ import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import SendIcon from '@mui/icons-material/Send';
 import {useParams} from 'react-router-dom';
-import {AUTHOR} from '../constants/common';
+//import {AUTHOR} from '../constants/common';
 import {useDispatch, useSelector } from 'react-redux';
 //import { addMessageWithSaga } from '../store/messages/actions';
-import { addMessageWithThunk } from '../store/messages/actions';
+//import { addMessageWithThunk } from '../store/messages/actions';
+import { addMessageWithFB } from '../middlewares/middleware';
 
 
 
@@ -29,7 +30,7 @@ const ControlPanel = () => {
         e.preventDefault();
         if (value !== ''){
             const newMessage = {text: value, author: authorName };
-            dispatch(addMessageWithThunk(chatId, newMessage));
+            dispatch(addMessageWithFB(chatId, newMessage));
             setValue('');
             inputRef.current?.focus();
         }

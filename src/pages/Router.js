@@ -42,7 +42,7 @@ const Router = () => {
             <Route element={<RequireAuth />}>
                 <Route path="/profile" element={<Profile />}/>
                 <Route path="/gists" element={<Gists />}/>
-                <Route path="/chats:chatId" element={<Chats />} />
+                <Route path="/chats/:chatId" element={<Chats />} />
             </Route>
             <Route path="*" element={<Chats />}/> 
         </Routes>
