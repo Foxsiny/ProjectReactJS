@@ -37,7 +37,7 @@ export const initTrackerWithFB = () => async (dispatch) => {
         const data = snapshot.val();
         const chatIds = Object.keys(data);
         const chatArr = chatIds.map((item) => ({
-            id: item,
+            Id: item,
             name: data[item].name
         }));
         dispatch(chatListUpdate(chatArr));
@@ -50,16 +50,15 @@ export const addChatWithFB = (name) => async () => {
     const db = getDatabase(firebaseConfig);
     const chatRef = ref(db, '/chats');
     const newChatRef = push(chatRef);
-    console.log('addChatWithFB--=--', name);
     set(newChatRef, {name: name}).then((res) => {
         console.log('chat added', res);
     });
 };
 
-export const deleteChatWithFB = (id) => async () => {
+export const deleteChatWithFB = (Id) => async () => {
     const db = getDatabase(firebaseConfig);
-    const chatRef = ref(db, `/chats/${id}`);
-    const messagersRef = ref(db, `/messages/${id}`);
+    const chatRef = ref(db, `/chats/${Id}`);
+    const messagersRef = ref(db, `/messages/${Id}`);
     remove (chatRef).then((res) => {
         console.log('Chat Removed', res)
     });

@@ -49,6 +49,12 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.50.1"
+    "sass": "^1.50.1",
+    "jest-watch-typeahead": "^0.6.5"
+  },
+
+  "jest": {
+    "verbose": true
   }
+
 }

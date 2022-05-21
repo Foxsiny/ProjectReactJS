@@ -40,7 +40,7 @@ const messagesReducer = (state = initialState, action) => {
         }
          
         case UPDATE_MESSAGES:
-            console.log('ac', action);
+            console.log('UPDATE_MESSAGES', action)
             return {
                 ...state,
                 messageList: {

@@ -12,22 +12,16 @@ import { AccountCircle, Android } from '@mui/icons-material';
 import { AUTHOR } from '../constants/common';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getMessagesByChatWithFB } from '../middlewares/middleware'
+import { getMessagesByChatWithFB, } from '../middlewares/middleware'
 
 const MessageList = () => {
     
     const allMessages = useSelector((state) => state.messages.messageList);
     const { name } = useSelector((state) => state.profile);
-    
     let   {chatId}  = useParams();
-
     const dispatch = useDispatch();
-    console.log('mes',allMessages);
-
-    //if (!allMessages[chatId]) return null;
-    
     const messages = allMessages[chatId];
-
+    
     const isAuthorBot = (author) => {
         return author === AUTHOR.bot;
     };
@@ -36,7 +30,7 @@ const MessageList = () => {
         dispatch(getMessagesByChatWithFB(chatId))
     }, [chatId]);
 
-    console.log('mes',messages);
+    
     
     return (
         <>

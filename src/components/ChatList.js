@@ -48,8 +48,8 @@ const ChatList = () => {
         handleClose();
     };
 
-    const deleteChat = (id) => {
-        dispatch(deleteChatWithFB(id));
+    const deleteChat = (Id) => {
+        dispatch(deleteChatWithFB(Id));
     };
 
     useEffect(() => {
@@ -61,13 +61,13 @@ const ChatList = () => {
             <List>
                 {chats?.length > 0 ? (
                     chats.map((chat) => (
-                    <Link to={`/chats/${chat.id}`} key={chat.id}>
+                    <Link to={`/chats/${chat.Id}`} key={chat.Id}>
                         <ListItem
                             secondaryAction={
                                 <IconButton 
                                     edge="end"
                                     aria-label="delete"
-                                    onClick={() => deleteChat(chat.id)}>
+                                    onClick={() => deleteChat(chat.Id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             }>

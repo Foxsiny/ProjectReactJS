@@ -27,7 +27,7 @@ const Gists = () => {
     
 
     const renderGist = useCallback(
-        (gist)=> <li key={gist.id}>{gist.description || 'No description'}</li>,
+        (gist)=> <li key={gist.Id}>{gist.description || 'No description'}</li>,
         []
     );
 
