@@ -54,7 +54,6 @@
   },
 
   "jest": {
-    "verbose": true
+    "clearMocks": true
   }
-
 }
